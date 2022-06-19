@@ -6,6 +6,7 @@ class RegexFlavour(Enum):
     Python = 'Python'
 
 BPE_PERCENT = 0.8
+BPE_SPLIT_CHAR = ' '
 MAX_DEPTH = 7
 POPULATION_SIZE = 2000
 MAX_ITERATIONS = 1000

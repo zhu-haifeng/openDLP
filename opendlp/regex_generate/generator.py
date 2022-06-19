@@ -43,7 +43,7 @@ def generate(status, regex_name, train_data_file):
 
     # 学习bpe token
     percent = conf.BPE_PERCENT
-    bpe_tokens = learn_bpe(dataset.pos_examples(), percent)
+    bpe_tokens = learn_bpe(dataset.pos_examples, percent)
 
     # 构建terminalSet和functionSet
     node_facto = NodeFactory()
