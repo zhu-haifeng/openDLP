@@ -13,3 +13,4 @@ class RandomGenerator:
         pop_size_growth = population_size - pop_size_full
         population.append(self.full.generate(pop_size_full))
         population.append(self.growth.generate(pop_size_growth))
+        return population

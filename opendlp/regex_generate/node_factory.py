@@ -1,3 +1,5 @@
+# TODD:
+# from regex_tree.abstract_node import *
 
 class NodeFactory:
     def __init__(self):
@@ -9,7 +11,7 @@ class NodeFactory:
         load default terminal set
         @return:
         """
-        raise NotImplementedError
+        self.terminal_set = list(bpe_tokens)
 
     def build_function_set(self):
         """
@@ -17,6 +19,9 @@ class NodeFactory:
         @return:
         """
         raise NotImplementedError
+        # TODO:
+        self.function_set = []
+
 
     def build(self, bpe_tokens=None):
         self.build_terminal_set(bpe_tokens)

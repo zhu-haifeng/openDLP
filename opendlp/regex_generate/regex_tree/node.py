@@ -42,7 +42,7 @@ class Node:
         """
 
     @abstractmethod
-    def set_parent(self):
+    def set_parent(self, parent):
         """
         set parent of current node
         @return:
@@ -56,7 +56,7 @@ class Node:
         """
 
     @abstractmethod
-    def form(self, string, flavour=RegexFlavour.Python, context=RegexContext()):
+    def form(self, string : str, flavour=RegexFlavour.Python, context=RegexContext()):
         """
         form regex string
         @param string: regex string before current node
