@@ -4,11 +4,11 @@ from pickle import FALSE
 from pandas._libs.tslibs.timedeltas import parse_timedelta_unit
 
 from opendlp.regex_generate.regex_tree.node import Node
-from opendlp.regex_generate.AbstractNode.AbstractNode import AbstractNode
-from opendlp.regex_generate.AbstractNode.TernaryOperator import TernaryOperator
+from opendlp.regex_generate.regex_tree.AbstractNode.AbstractNode import AbstractNode
+from opendlp.regex_generate.regex_tree.AbstractNode.TernaryOperator import TernaryOperator
 
 
-class MatchMInMax (TernaryOperator):
+class MatchMinMax (TernaryOperator):
 
     Max_N_generation = 20
 

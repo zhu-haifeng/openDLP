@@ -56,6 +56,7 @@ def learn_bpe(strings: List[str], percent_threshold: float) -> Set[str]:
     @return: learned byte pair encode tokens
     """
     vocab = build_vocab(strings)
+    s = set()
     percent = 1.0
     while percent > percent_threshold:
         pair2freq = pair_freq_stats(vocab)
@@ -63,17 +64,17 @@ def learn_bpe(strings: List[str], percent_threshold: float) -> Set[str]:
         percent = pair2freq.get(best)/len(strings)
         if(percent >= percent_threshold):
             vocab = merge(best, vocab)
+            s.add(BPE_SPLIT_CHAR.join(best))
         # print(best, percent)
-    s = set()
-    for string in vocab:
-        print("string")
-        print(string)
+    # for string in vocab:
+    #     print("string")
+    #     print(string)
 
-        tokens = string.split(BPE_SPLIT_CHAR)
-        print("tokens")
-        print(tokens)
-        for token in tokens:
-            s.add(token)
+    #     tokens = string.split(BPE_SPLIT_CHAR)
+    #     print("tokens")
+    #     print(tokens)
+    #     for token in tokens:
+            # s.add(token)
     LOGGER.info("bpe set:")
     LOGGER.info(s)
     print(s)

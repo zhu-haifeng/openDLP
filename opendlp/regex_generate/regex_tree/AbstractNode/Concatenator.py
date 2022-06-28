@@ -3,9 +3,9 @@ from abc import abstractmethod
 # from pandas._libs.tslibs.timedeltas import parse_timedelta_unit
 
 from opendlp.regex_generate.regex_tree.node import Node
-from opendlp.regex_generate.AbstractNode.AbstractNode import AbstractNode
-from opendlp.regex_generate.AbstractNode.BinaryOperator import BinaryOperator
-from opendlp.regex_generate.AbstractNode.Or import Or
+from opendlp.regex_generate.regex_tree.AbstractNode.AbstractNode import AbstractNode
+from opendlp.regex_generate.regex_tree.AbstractNode.BinaryOperator import BinaryOperator
+from opendlp.regex_generate.regex_tree.AbstractNode.Or import Or
 
 
 class Concatenator(BinaryOperator):
