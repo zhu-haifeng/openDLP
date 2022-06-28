@@ -1,5 +1,29 @@
 # TODD:
-# from regex_tree.abstract_node import *
+from opendlp.regex_generate.regex_tree.AbstractNode import *
+from opendlp.regex_generate.regex_tree.AbstractNode.Concatenator import Concatenator
+from opendlp.regex_generate.regex_tree.AbstractNode.Group import Group
+from opendlp.regex_generate.regex_tree.AbstractNode.ListMatch import ListMatch
+from opendlp.regex_generate.regex_tree.AbstractNode.ListNotMatch import ListNotMatch
+from opendlp.regex_generate.regex_tree.AbstractNode.Lookaround import Lookaround
+from opendlp.regex_generate.regex_tree.AbstractNode.MatchMinMax import MatchMinMax
+from opendlp.regex_generate.regex_tree.AbstractNode.MatchMinMaxGreedy import MatchMinMaxGreedy
+from opendlp.regex_generate.regex_tree.AbstractNode.MatchOneOrMore import MatchOneOrMore
+from opendlp.regex_generate.regex_tree.AbstractNode.MatchOneOrMoreGreedy import MatchOneOrMoreGreedy
+from opendlp.regex_generate.regex_tree.AbstractNode.MatchZeroOrOne import MatchZeroOrOne
+from opendlp.regex_generate.regex_tree.AbstractNode.MatchZeroOrOneGreedy import MatchZeroOrOneGreedy
+from opendlp.regex_generate.regex_tree.AbstractNode.MatchZeroOrMore import MatchZeroOrMore
+from opendlp.regex_generate.regex_tree.AbstractNode.MatchZeroOrOneGreedy import MatchZeroOrOneGreedy
+from opendlp.regex_generate.regex_tree.AbstractNode.MatchZeroOrMore import MatchZeroOrMore
+from opendlp.regex_generate.regex_tree.AbstractNode.MatchZeroOrMoreGreedy import MatchZeroOrMoreGreedy
+from opendlp.regex_generate.regex_tree.AbstractNode.NegativeLookahead import NegativeLookahead
+from opendlp.regex_generate.regex_tree.AbstractNode.NegativeLookbehind import NegativeLookbehind
+from opendlp.regex_generate.regex_tree.AbstractNode.NonCapturingGroup import NonCapturingGroup
+from opendlp.regex_generate.regex_tree.AbstractNode.Or import Or
+from opendlp.regex_generate.regex_tree.AbstractNode.PositiveLookahead import PositiveLookahead
+from opendlp.regex_generate.regex_tree.AbstractNode.PositiveLookbehind import PositiveLookbehind
+from opendlp.regex_generate.regex_tree.AbstractNode.PositiveLookahead import PositiveLookahead
+from opendlp.regex_generate.regex_tree.AbstractNode.PositiveLookbehind import PositiveLookbehind
+
 
 class NodeFactory:
     def __init__(self):
@@ -11,16 +35,25 @@ class NodeFactory:
         load default terminal set
         @return:
         """
-        self.terminal_set = list(bpe_tokens)
+        self.terminal_set += []
+        self.terminal_set += list(bpe_tokens)
 
     def build_function_set(self):
         """
         load default terminal set
         @return:
         """
-        raise NotImplementedError
-        # TODO:
-        self.function_set = []
+        self.function_set = [
+            Concatenator(),         Or(),
+            MatchMinMax(),          MatchMinMaxGreedy(),
+            PositiveLookahead(),    NegativeLookahead(),
+            PositiveLookbehind(),   NegativeLookbehind(),
+            MatchOneOrMore(),       MatchOneOrMoreGreedy(),
+            MatchZeroOrMore(),      MatchZeroOrMoreGreedy(),
+            MatchZeroOrOne(),       MatchZeroOrOneGreedy(),
+            Group(),                NonCapturingGroup(),
+            ListMatch(),            ListNotMatch()
+        ]
 
 
     def build(self, bpe_tokens=None):
