@@ -1,11 +1,11 @@
 from heapq import merge
-from symtable import symtable
 from typing import List, Set, Dict
 import re
+import logging
 
-from transformers import VanForImageClassification
 from opendlp.regex_generate.config.conf import BPE_SPLIT_CHAR
 
+LOGGER = logging.getLogger('openDLP')
 
 def split(s_in: str) -> str:
     s_out = ""
@@ -74,6 +74,8 @@ def learn_bpe(strings: List[str], percent_threshold: float) -> Set[str]:
         print(tokens)
         for token in tokens:
             s.add(token)
+    LOGGER.info("bpe set:")
+    LOGGER.info(s)
     print(s)
     return s
 
