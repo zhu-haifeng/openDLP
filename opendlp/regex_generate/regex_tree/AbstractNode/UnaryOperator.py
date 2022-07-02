@@ -14,7 +14,8 @@ class UnaryOperator (AbstractNode):
 
     def get_max_child_count():
         return 1
-
+        
+    @abstractmethod
     def buildcopy():
         ""
         ""
@@ -24,7 +25,9 @@ class UnaryOperator (AbstractNode):
         if(self.get_children().isEmpty() == 0):
             child = self.get_children(0).clone_tree()
             child.set_parent(clone)
-            clone.get_children().add(child)
+            # clone.get_children().add(child)
+            tmp = child.get_children()
+            tmp += child
 
         return clone
 

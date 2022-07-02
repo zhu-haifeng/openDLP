@@ -3,10 +3,15 @@ from logging import root
 import re
 
 from pandas._libs.tslibs.timedeltas import parse_timedelta_unit
+from opendlp.regex_generate.AbstractNode.Concatenator import Concatenator
 
 from opendlp.regex_generate.regex_tree.node import Node
-from opendlp.regex_generate.regex_tree.AbstractNode.AbstractNode import AbstractNode
+# from opendlp.regex_generate.regex_tree.AbstractNode.AbstractNode import AbstractNode
 from opendlp.regex_generate.regex_tree.AbstractNode.UnaryOperator import UnaryOperator
+from opendlp.regex_generate.regex_tree.leaf.constant import Constant
+from opendlp.regex_generate.regex_tree.leaf.regex_range import RegexRange
+from opendlp.regex_generate.regex_tree.AbstractNode.Concatenator import Concatenator
+
 
 
 class ListMatch (UnaryOperator) :
@@ -16,15 +21,18 @@ class ListMatch (UnaryOperator) :
     def form(self, string, flavour, context):
         child = Node
         child = self.get_children(0)
-        string.append("[")
+        # string.append("[")
+        string += ("[")
         child.form(self, string, flavour, context)
-        string.append("]")
+        # string.append("]")
+        string += ("]")
+        return string
 
     def is_valid(self):
         return check_valid(self.get_children(0))
 
     def check__valid(root,self):
-        if(~(isinstance(root, Constant) or isinstance(root,RegexRange) or isinstance(root,Concatenato ))):
+        if(~(isinstance(root, Constant) or isinstance(root,RegexRange) or isinstance(root,Concatenator ))):
             return False
            
         for child in range(root.get_children()):

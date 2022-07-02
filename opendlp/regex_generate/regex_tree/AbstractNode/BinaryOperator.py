@@ -1,4 +1,5 @@
 from abc import abstractmethod
+import this
 
 from pandas._libs.tslibs.timedeltas import parse_timedelta_unit
 
@@ -8,8 +9,14 @@ from opendlp.regex_generate.regex_tree.AbstractNode import AbstractNode
 
 
 class BinaryOperator (AbstractNode):
+    parent = Node
+
+
+
     def __init__(self):
-        self.parent = []
+        # self.parent = []
+        ""
+        ""
 
     def get_min_children_count() -> int:
         return 2
@@ -39,7 +46,7 @@ class BinaryOperator (AbstractNode):
         for child in range(this.get_children()):
             newChild = child.clone_tree()
             newChild.set_parent(bop)
-            bopChild.add(newChild)
+            bopChild += (newChild)
         
         return bop
         
