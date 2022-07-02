@@ -9,7 +9,7 @@ from opendlp.regex_generate.config.evolve_param import EvolveParam
 from opendlp.regex_generate.evolution.evolve import evolve
 
 
-def get_fitness_rank(population, objective):
+def get_fitness_rank(population, objective: Objective):
     population_fitness = []
     for tree in population:
         fitness_arr = objective.cal_fitness(tree)
@@ -83,8 +83,8 @@ def generate(status, regex_name, train_data_file):
     # 输出结果
     result_regexes = []
     for i, fitness in enumerate(result_fitness):
-        sub_regex_string = ''
-        fitness.tree.form(sub_regex_string, conf.RegexFlavour.Python)
+        # sub_regex_string = ''
+        sub_regex_string = fitness.tree.form("", conf.RegexFlavour.Python)
         print('sub_regex_{}: {}'.format(i, sub_regex_string))
         result_regexes.append(sub_regex_string)
 

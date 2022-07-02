@@ -1,10 +1,10 @@
-# TODD:
-from opendlp.regex_generate.regex_tree.AbstractNode import *
+from ast import Constant
+from opendlp.regex_generate.regex_tree.leaf.constant import Constant
+from opendlp.regex_generate.regex_tree.leaf.regex_range import RegexRange
 from opendlp.regex_generate.regex_tree.AbstractNode.Concatenator import Concatenator
 from opendlp.regex_generate.regex_tree.AbstractNode.Group import Group
 from opendlp.regex_generate.regex_tree.AbstractNode.ListMatch import ListMatch
 from opendlp.regex_generate.regex_tree.AbstractNode.ListNotMatch import ListNotMatch
-from opendlp.regex_generate.regex_tree.AbstractNode.Lookaround import Lookaround
 from opendlp.regex_generate.regex_tree.AbstractNode.MatchMinMax import MatchMinMax
 from opendlp.regex_generate.regex_tree.AbstractNode.MatchMinMaxGreedy import MatchMinMaxGreedy
 from opendlp.regex_generate.regex_tree.AbstractNode.MatchOneOrMore import MatchOneOrMore
@@ -35,8 +35,23 @@ class NodeFactory:
         load default terminal set
         @return:
         """
-        self.terminal_set += []
-        self.terminal_set += list(bpe_tokens)
+        constants = [
+            "\\d",
+            "\\w",
+            "\\.", ":", ",", ";",
+            "_", "=", "\"", "'",
+            "\\\\",
+            "/",
+            "\\?", "\\!",
+            "\\}", "\\{", "\\(", "\\)", "\\[", "\\]", "<", ">",
+            "@", "#", " ", " "
+        ]
+        ranges = []
+        constants += list(bpe_tokens)
+        for c in constants:
+            self.terminal_set.append(Constant(c))
+        for s in ranges:
+            self.terminal_set.append(RegexRange(s))
 
     def build_function_set(self):
         """
@@ -51,6 +66,16 @@ class NodeFactory:
             MatchOneOrMore(),       MatchOneOrMoreGreedy(),
             MatchZeroOrMore(),      MatchZeroOrMoreGreedy(),
             MatchZeroOrOne(),       MatchZeroOrOneGreedy(),
+            Group(),                NonCapturingGroup(),
+            ListMatch(),            ListNotMatch()
+        ]
+
+        self.function_set = [
+            Concatenator(),         Or(),
+            MatchMinMax(),
+            MatchOneOrMore(),
+            MatchZeroOrMore(),
+            MatchZeroOrOne(),
             Group(),                NonCapturingGroup(),
             ListMatch(),            ListNotMatch()
         ]
