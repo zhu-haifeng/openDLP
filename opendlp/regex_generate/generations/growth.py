@@ -19,13 +19,13 @@ class Growth:
 
         i = 0
         while i < population_size:
-            candidate = self.full(1)
+            candidate = self.grow(1)
             if(candidate.is_valid()):
                 population.append(candidate)
             i += 1
         return population
 
-    def full(self, depth: int) -> Node:
+    def grow(self, depth: int) -> Node:
         tree: Node = self.randomFunction()
         if(depth >= self.max_depth-1):
             # for i in range(tree.get_max_children_count()-tree.get_min_children_count(), tree.get_max_children_count()):
@@ -36,12 +36,12 @@ class Growth:
                 tree.get_children().append(leaf)
         else:
             for i in range(tree.get_max_children_count()):
-                if(randint(0,1)):
+                if(randint(0, 1)):
                     leaf: Leaf = self.randomLeaf()
                     leaf.set_parent(tree)
                     tree.get_children().append(leaf)
                 else:
-                    node: Node = self.randomFunction()
+                    node: Node = self.grow(depth+1)
                     node.set_parent(tree)
                     tree.get_children().append(node)
         return tree

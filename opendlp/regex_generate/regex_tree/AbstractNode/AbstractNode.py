@@ -21,7 +21,7 @@ class AbstractNode (Node):
     #     return False
 
     def get_children(self,):
-        print ("abstract get_children")
+        # print ("abstract get_children")
         return self.children
 
     # def get_id(self):

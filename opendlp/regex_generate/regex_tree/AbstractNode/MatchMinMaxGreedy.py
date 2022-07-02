@@ -1,11 +1,5 @@
 
 from opendlp.regex_generate.regex_tree.AbstractNode.TernaryOperator import TernaryOperator
-# from opendlp.regex_generate.regex_tree.AbstractNode.MatchMinMax import MatchMinMax
-from opendlp.regex_generate.regex_tree.leaf.constant import Constant
-# from opendlp.regex_generate.regex_tree.AbstractNode.Concatenator import Concatenator
-# from opendlp.regex_generate.regex_tree.AbstractNode.Lookaround import Lookaround
-# from opendlp.regex_generate.regex_tree.AbstractNode.Quantifier import Quantifiers
-# from opendlp.regex_generate.regex_tree.AbstractNode.MatchMinMaxGreedy import MatchMinMaxGreedy
 
 
 
@@ -26,9 +20,19 @@ class MatchMinMaxGreedy (TernaryOperator):
         return string
 
     def is_valid(self):
+        from opendlp.regex_generate.regex_tree.AbstractNode.MatchMinMax import MatchMinMax
+        from opendlp.regex_generate.regex_tree.leaf.constant import Constant
+        from opendlp.regex_generate.regex_tree.AbstractNode.Concatenator import Concatenator
+        from opendlp.regex_generate.regex_tree.AbstractNode.Lookaround import Lookaround
+        from opendlp.regex_generate.regex_tree.AbstractNode.Quantifier import Quantifiers
         first = self.get_first()
         "检查是否之前的是否输错"
-        validFirst = first.is_valid() and not(isinstance(first,Concatenator) or isinstance(first,Quantifiers) or isinstance(first,MatchMinMax) or isinstance(first,MatchMinMaxGreedy) or isinstance(first,Lookaround))
+        validFirst = first.is_valid() and not(
+            isinstance(first, Concatenator)
+            or isinstance(first, Quantifiers)
+            or isinstance(first, MatchMinMax)
+            or isinstance(first, MatchMinMaxGreedy)
+            or isinstance(first, Lookaround))
         second = self.get_second()
         third = self.get_third()
 

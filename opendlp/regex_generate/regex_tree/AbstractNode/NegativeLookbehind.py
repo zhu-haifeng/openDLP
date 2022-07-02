@@ -12,7 +12,7 @@ class NegativeLookbehind (Lookaround) :
         if(valid == 0):
             return valid
 
-        return is_look_behind_valid()
+        return self.is_look_behind_vaild()
 
     def form(self, string, flavour, context):
         self +=("(?<!")

@@ -3,6 +3,8 @@ from opendlp.regex_generate.regex_tree.leaf.leaf import Leaf
 from typing import List
 from random import randint
 from opendlp.regex_generate.node_factory import NodeFactory
+import logging
+LOGGER = logging.getLogger('openDLP')
 
 
 class Full:
@@ -24,6 +26,7 @@ class Full:
             if(candidate.is_valid()):
                 population.append(candidate)
             i += 1
+            LOGGER.info(f"num {i}th population ok")
         return population
 
     def full(self, depth: int) -> Node:
@@ -36,7 +39,7 @@ class Full:
                 tree.get_children().append(leaf)
         else:
             for i in range(tree.get_max_children_count()):
-                node: Node = self.randomFunction()
+                node: Node = self.full(depth+1)
                 node.set_parent(tree)
                 tree.get_children().append(node)
         return tree

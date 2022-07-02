@@ -1,8 +1,4 @@
 from abc import abstractmethod
-import this
-
-from pandas._libs.tslibs.timedeltas import parse_timedelta_unit
-
 from opendlp.regex_generate.regex_tree.node import Node
 from opendlp.regex_generate.regex_tree.AbstractNode.AbstractNode import AbstractNode
 
@@ -18,11 +14,11 @@ class TernaryOperator(AbstractNode):
         ""
         ""
     def clone_tree(self) ->Node :
-        top = buildcopy();
+        top = self.buildcopy();
         topchild = []
         topchild = top.get_children()
         child = Node
-        for child in range(this.get_children()):
+        for child in range(self.get_children()):
                 Newchild = child.clone_tree()
                 Newchild.set_parent(top)
                 topchild += Newchild

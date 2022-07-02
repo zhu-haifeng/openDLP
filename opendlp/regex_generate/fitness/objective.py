@@ -1,19 +1,22 @@
 import re
 import numpy as np
+from opendlp.regex_generate.config.conf import RegexFlavour
+from opendlp.regex_generate.regex_tree.regex_context import RegexContext
 import logging
+from opendlp.regex_generate.regex_tree.node import Node
 LOGGER = logging.getLogger('openDLP')
 
 class Objective:
     def __init__(self, dataset):
         self.__dataset = dataset
 
-    def cal_fitness(self, tree):
+    def cal_fitness(self, tree:Node):
         """
         calculate fitness of a regex tree
         @param tree: a regex tree
         @return: fitness array with three value:[Ps, Pc, Lscore]
         """
-        r = tree.form("")
+        r = tree.form("", flavour=RegexFlavour.Python, context=RegexContext())
         # r = "13[3456789]\d{8}"
         pat = re.compile(r)
         len_P = len(self.__dataset.pos_examples)

@@ -1,12 +1,5 @@
-from abc import abstractmethod
-from logging import root
-
-from pandas._libs.tslibs.timedeltas import parse_timedelta_unit
-
 from opendlp.regex_generate.regex_tree.node import Node
 from opendlp.regex_generate.regex_tree.AbstractNode.Quantifier import Quantifiers
-# from opendlp.regex_generate.regex_tree.AbstractNode.Group import Group
-# from opendlp.regex_generate.regex_tree.AbstractNode.NonCapturingGroup import NonCapturingGroup
 
 
 class MatchOneOrMore (Quantifiers):
@@ -16,10 +9,13 @@ class MatchOneOrMore (Quantifiers):
 
 
     def form(self, string, flavour, context):
+        
+        from opendlp.regex_generate.regex_tree.AbstractNode.Group import Group
+        from opendlp.regex_generate.regex_tree.AbstractNode.NonCapturingGroup import NonCapturingGroup
         tmp = []
         child = Node
         child = self.get_children()[0]
-        index = context.incGroup()
+        index = context.inc_groups()
         child.form(self, tmp, flavour, context)
         l = tmp.length()-1 if child.is_escaped() else tmp.length()
         group = l > 1 and not(child.is_character_class()) and  not(isinstance(child, Group)) and not(isinstance(child,NonCapturingGroup))

@@ -1,15 +1,5 @@
-from abc import abstractmethod
-from logging import root
-import re
-
-from pandas._libs.tslibs.timedeltas import parse_timedelta_unit
-
 from opendlp.regex_generate.regex_tree.node import Node
 from opendlp.regex_generate.regex_tree.AbstractNode.UnaryOperator import UnaryOperator
-from opendlp.regex_generate.regex_tree.leaf.constant import Constant
-from opendlp.regex_generate.regex_tree.leaf.regex_range import RegexRange
-from opendlp.regex_generate.regex_tree.AbstractNode.Concatenator import Concatenator
-
 
 class ListMatch (UnaryOperator):
     def buildcopy(self):
@@ -29,6 +19,10 @@ class ListMatch (UnaryOperator):
         return self.check_valid(self.get_children()[0])
 
     def check_valid(root, self):
+
+        from opendlp.regex_generate.regex_tree.leaf.constant import Constant
+        from opendlp.regex_generate.regex_tree.leaf.regex_range import RegexRange
+        from opendlp.regex_generate.regex_tree.AbstractNode.Concatenator import Concatenator
         if(not(isinstance(root, Constant) or isinstance(root, RegexRange) or isinstance(root, Concatenator))):
             return False
 

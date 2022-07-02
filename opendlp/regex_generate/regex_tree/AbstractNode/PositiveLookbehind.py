@@ -11,7 +11,7 @@ class PositiveLookbehind (Lookaround):
         if(valid == 0):
             return valid
         
-        return is_look_behind_valid()
+        return self.is_look_behind_valid()
 
     def form(self, string, flavour, context):
         self +=("(?<=")
