@@ -3,7 +3,11 @@ from abc import abstractmethod
 from pandas._libs.tslibs.timedeltas import parse_timedelta_unit
 
 from opendlp.regex_generate.regex_tree.node import Node
+<<<<<<< HEAD
 from opendlp.regex_generate.regex_tree.AbstractNode.AbstractNode import AbstractNode
+=======
+from opendlp.regex_generate.regex_tree.AbstractNode import AbstractNode
+>>>>>>> my/dev
 
 
 
