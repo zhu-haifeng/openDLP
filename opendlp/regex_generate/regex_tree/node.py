@@ -8,7 +8,7 @@ from opendlp.regex_generate.regex_tree.regex_context import RegexContext
 class Node:
     def __init__(self):
         self.id = IDFactory.next_id()
-        self.children = []
+        # self.children = []
 
     def get_id(self):
         return self.id

@@ -10,19 +10,19 @@ from opendlp.regex_generate.regex_tree.AbstractNode.UnaryOperator import UnaryOp
 
 class Group (UnaryOperator) :
     def buildcopy(self):
-        return self
+        return Group()
 
     def form(self, string, flavour, context):
         # self.append("(")
         string += ("(")
         context.incGroup();
-        self.get_children(0).form(self, string, flavour, context)
+        self.get_children()[0].form(self, string, flavour, context)
         # self.append(")")
         string += (")")
         return string
 
     def is_valid(self):
-        return self.get_children(0).is_valid()
+        return self.get_children()[0].is_valid()
         
         
         

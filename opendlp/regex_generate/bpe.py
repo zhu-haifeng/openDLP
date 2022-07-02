@@ -64,7 +64,7 @@ def learn_bpe(strings: List[str], percent_threshold: float) -> Set[str]:
         percent = pair2freq.get(best)/len(strings)
         if(percent >= percent_threshold):
             vocab = merge(best, vocab)
-            s.add(BPE_SPLIT_CHAR.join(best))
+            s.add("".join(best))
         # print(best, percent)
     # for string in vocab:
     #     print("string")

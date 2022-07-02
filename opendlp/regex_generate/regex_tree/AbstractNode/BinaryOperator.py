@@ -4,28 +4,20 @@ import this
 from pandas._libs.tslibs.timedeltas import parse_timedelta_unit
 
 from opendlp.regex_generate.regex_tree.node import Node
-<<<<<<< HEAD
 from opendlp.regex_generate.regex_tree.AbstractNode.AbstractNode import AbstractNode
-=======
-from opendlp.regex_generate.regex_tree.AbstractNode import AbstractNode
->>>>>>> my/dev
 
 
 
 class BinaryOperator (AbstractNode):
     parent = Node
-
-
-
     def __init__(self):
-        # self.parent = []
-        ""
-        ""
+        super().__init__()
 
-    def get_min_children_count() -> int:
+
+    def get_min_children_count(self) -> int:
         return 2
 
-    def get_max_children_count() -> int:
+    def get_max_children_count(self) -> int:
         return 2
 
     def getLeft(self):

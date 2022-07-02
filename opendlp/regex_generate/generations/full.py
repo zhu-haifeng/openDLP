@@ -1,8 +1,8 @@
-from regex_tree.node import Node
-from regex_tree.leaf.leaf import Leaf
+from opendlp.regex_generate.regex_tree.node import Node
+from opendlp.regex_generate.regex_tree.leaf.leaf import Leaf
 from typing import List
 from random import randint
-from node_factory import NodeFactory
+from opendlp.regex_generate.node_factory import NodeFactory
 
 
 class Full:
@@ -21,7 +21,7 @@ class Full:
         i = 0
         while i < population_size:
             candidate = self.full(1)
-            if(candidate.isValid()):
+            if(candidate.is_valid()):
                 population.append(candidate)
             i += 1
         return population
@@ -42,7 +42,9 @@ class Full:
         return tree
 
     def randomFunction(self):
-        return self.node_factory.function_set(randint(0, len(self.node_factory.function_set)))
+        # print(self.node_factory.function_set)
+
+        return self.node_factory.function_set[randint(0, len(self.node_factory.function_set)-1)]
 
     def randomLeaf(self) -> Leaf:
-        return self.node_factory.terminal_set(randint(0, len(self.node_factory.terminal_set)))
+        return self.node_factory.terminal_set[randint(0, len(self.node_factory.terminal_set)-1)]

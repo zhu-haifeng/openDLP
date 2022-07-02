@@ -9,16 +9,15 @@ from opendlp.regex_generate.regex_tree.AbstractNode.AbstractNode import Abstract
 class TernaryOperator(AbstractNode):
     parent = Node
 
-
     def __init__(self):
-    #    self.parent = []
-        ""
-        ""
+        super().__init__()
+        
+
     @abstractmethod
     def buildcopy(self):
         ""
         ""
-    def clone_tree() ->Node :
+    def clone_tree(self) ->Node :
         top = buildcopy();
         topchild = []
         topchild = top.get_children()
@@ -26,7 +25,7 @@ class TernaryOperator(AbstractNode):
         for child in range(this.get_children()):
                 Newchild = child.clone_tree()
                 Newchild.set_parent(top)
-                topchild +=(Newchild)
+                topchild += Newchild
         return top
 
     def get_parent(self):
@@ -35,20 +34,20 @@ class TernaryOperator(AbstractNode):
     def set_parent(self,parent):
         self.parent = parent
 
-    def get_min_child_count():
+    def get_min_children_count(self):
         return 3
 
-    def get_max_child_count():
+    def get_max_children_count(self):
         return 3
 
     def get_first(self) -> Node:
-        return self.get_children(0)
+        return self.get_children()[0]
 
     def get_second(self) -> Node:
-        return self.get_children(1)
+        return self.get_children()[1]
 
     def get_third(self) ->Node:
-        return self.get_children(2)
+        return self.get_children()[2]
         
         
         

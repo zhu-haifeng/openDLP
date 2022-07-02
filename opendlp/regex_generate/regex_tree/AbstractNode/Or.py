@@ -1,10 +1,10 @@
 
 from opendlp.regex_generate.regex_tree.AbstractNode.BinaryOperator import BinaryOperator
-from opendlp.regex_generate.regex_tree.AbstractNode.Quantifier import Quantifiers
+# from opendlp.regex_generate.regex_tree.AbstractNode.Quantifier import Quantifiers
 
 class Or(BinaryOperator):
     def buildCopy(self):
-        return self
+        return Or()
 
     def form(self, string, flavour, context):
         if (isinstance(self.get_parent(), Quantifiers)):
