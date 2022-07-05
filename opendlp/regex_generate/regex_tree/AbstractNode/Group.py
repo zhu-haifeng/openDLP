@@ -16,7 +16,7 @@ class Group (UnaryOperator) :
         # self.append("(")
         string += ("(")
         context.inc_groups();
-        self.get_children()[0].form(self, string, flavour, context)
+        self.get_children()[0].form(string, flavour, context)
         # self.append(")")
         string += (")")
         return string

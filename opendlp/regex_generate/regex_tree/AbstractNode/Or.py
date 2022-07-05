@@ -10,9 +10,9 @@ class Or(BinaryOperator):
         if (isinstance(self.get_parent(), Quantifiers)):
             self += ("(?:")
 
-        self.getLeft().form(self, string, flavour, context)
+        self.getLeft().form(string, flavour, context)
         self  += ("|")
-        self.getRight().form(self, string, flavour, context)
+        self.getRight().form(string, flavour, context)
         if (isinstance(self.get_parent(),Quantifiers)):
             self += (")")
         return string

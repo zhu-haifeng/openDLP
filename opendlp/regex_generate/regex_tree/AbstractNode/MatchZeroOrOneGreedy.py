@@ -5,7 +5,7 @@ class MatchZeroOrOneGreedy (Quantifiers) :
         return MatchZeroOrOneGreedy()
 
     def form(self, string, flavour, context):
-        self.get_children()[0].form(self, string, flavour, context)
+        self.get_children()[0].form(string, flavour, context)
         string +=("?")
         return string
         

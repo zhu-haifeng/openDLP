@@ -7,7 +7,7 @@ class ListNotMatch (UnaryOperator) :
     def form(self, string, flavour, context):
         child = self.get_children()[0]
         string += ("[^")
-        child.form(self, string, flavour, context)
+        child.form(string, flavour, context)
         string += ("]")
         return string
 

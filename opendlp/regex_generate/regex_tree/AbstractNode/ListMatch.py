@@ -10,7 +10,7 @@ class ListMatch (UnaryOperator):
         child = self.get_children()[0]
         # string.append("[")
         string += ("[")
-        child.form(self, string, flavour, context)
+        child.form(string, flavour, context)
         # string.append("]")
         string += ("]")
         return string

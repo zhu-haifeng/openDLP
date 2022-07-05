@@ -16,7 +16,7 @@ class NegativeLookbehind (Lookaround) :
 
     def form(self, string, flavour, context):
         self +=("(?<!")
-        self.get_children()[0].form(self, string, flavour, context)
+        self.get_children()[0].form(string, flavour, context)
         self +=(")")
         return string
             

@@ -11,11 +11,11 @@ class MatchMinMaxGreedy (TernaryOperator):
         return MatchMinMaxGreedy()
     
     def form(self, string, flavour, context):
-        self.get_first().form(self, string, flavour, context)
+        self.get_first().form(string, flavour, context)
         string +=("{")
-        string +=(int(str(self.get_second())))
+        string.add(int(str(self.get_second())))
         string +=(",")
-        string +=(int(str(self.get_third())))
+        string.add(int(str(self.get_third())))
         string +=("}")
         return string
 

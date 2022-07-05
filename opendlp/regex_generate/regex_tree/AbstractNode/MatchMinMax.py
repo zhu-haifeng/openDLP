@@ -18,23 +18,23 @@ class MatchMinMax (TernaryOperator):
         child = Node
         child = self.get_first()
         index = context.inc_groupss();
-        child.form(self, tmp, flavour, context)
-        l = tmp.length()-1 if child.is_escaped() else tmp.length()
+        child.form(tmp, flavour, context)
+        l = tmp.len()-1 if child.is_escaped() else tmp.length()
         group = l > 1 and not(child.is_character_class()) and not(
             isinstance(child, Group)) and not(isinstance(child, NonCapturingGroup))
 
         if (group):
             string += ("(?:")
-            string += (tmp)
+            string.add(tmp)
             string += (")")
         else:
-            string += (tmp)
+            string.add(tmp)
 
-        string += "{"
-        string += int(str(self.get_second()))
+        string += ("{")
+        string += (int(str(self.get_second())))
         string += ","
-        string += int(str(self.get_third()))
-        string += "}+"
+        string += (int(str(self.get_third())))
+        string += ("}+")
         return string
 
     def is_valid(self):

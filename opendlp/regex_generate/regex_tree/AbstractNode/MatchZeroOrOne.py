@@ -14,15 +14,15 @@ class MatchZeroOrOne (Quantifiers) :
         child = Node
         child = self.get_children()[0]
         index = context.inc_groups()
-        child.form(self, tmp, flavour, context)
-        l = tmp.length()-1 if child.is_escaped() else tmp.length()
+        child.form(tmp, flavour, context)
+        l = tmp.len()-1 if child.is_escaped() else tmp.length()
         group = l > 1 and not(child.is_character_class()) and  not(isinstance(child, Group)) and not(isinstance(child,NonCapturingGroup))
         if(group):
             string +=("(?:")
-            string +=(tmp)
+            string.add(tmp)
             string +=(")")
         else:
-            string +=(tmp)
+            string.add(tmp)
         
         string +=("?+")
         return string

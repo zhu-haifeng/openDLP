@@ -10,7 +10,7 @@ class Concatenator(BinaryOperator):
 
     
     def form(self, string, flavour, context):
-        string += self.getLeft().form(self, string, flavour, context) + self.getRight().form(self, string, flavour, context)
+        string += self.getLeft().form(string, flavour, context) + self.getRight().form(string, flavour, context)
         return  string
         
     def is_vaild(self):
