@@ -14,9 +14,9 @@ class PositiveLookbehind (Lookaround):
         return self.is_look_behind_valid()
 
     def form(self, string, flavour, context):
-        self +=("(?<=")
+        string +=("(?<=")
         self.get_children()[0].form(string, flavour, context)
-        self +=(")")
+        string +=(")")
         return string
         
         

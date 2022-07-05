@@ -8,10 +8,10 @@ class ListMatch (UnaryOperator):
     def form(self, string, flavour, context):
         child = Node
         child = self.get_children()[0]
-        # string.append("[")
+        # string +=("[")
         string += ("[")
-        child.form(string, flavour, context)
-        # string.append("]")
+        string=child.form(string, flavour, context)
+        # string +=("]")
         string += ("]")
         return string
 

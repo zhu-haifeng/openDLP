@@ -7,9 +7,9 @@ class NonCapturingGroup (UnaryOperator) :
         return NonCapturingGroup()
 
     def form(self, string, flavour, context):
-        self +=("(?:")
+        string +=("(?:")
         self.get_children()[0].form(string, flavour, context)
-        self +=(")")
+        string +=(")")
         return string
 
     def is_valid(self):

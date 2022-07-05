@@ -8,13 +8,13 @@ class Or(BinaryOperator):
 
     def form(self, string, flavour, context):
         if (isinstance(self.get_parent(), Quantifiers)):
-            self += ("(?:")
+            string += ("(?:")
 
         self.getLeft().form(string, flavour, context)
         self  += ("|")
         self.getRight().form(string, flavour, context)
         if (isinstance(self.get_parent(),Quantifiers)):
-            self += (")")
+            string += (")")
         return string
     
     def is_vaild(self):
