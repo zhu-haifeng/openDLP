@@ -46,7 +46,7 @@ class NodeFactory:
             "\\}", "\\{", "\\(", "\\)", "\\[", "\\]", "<", ">",
             "@", "#", " ", " "
         ]
-        ranges = []
+        ranges = ['0-9','a-z','A-Z']
         constants += list(bpe_tokens)
         for c in constants:
             self.terminal_set.append(Constant(c))

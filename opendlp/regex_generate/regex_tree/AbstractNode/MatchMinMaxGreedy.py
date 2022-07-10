@@ -7,16 +7,17 @@ from opendlp.regex_generate.regex_tree.AbstractNode.TernaryOperator import Terna
 class MatchMinMaxGreedy (TernaryOperator):
     MAX_N_GENERATION = 20
 
-    def buildcopy(self):
+    def build_copy(self):
         return MatchMinMaxGreedy()
     
     def form(self, string, flavour, context):
-        self.get_first().form(string, flavour, context)
-        string +=("{")
-        string +=(int(str(self.get_second())))
-        string +=(",")
-        string +=(int(str(self.get_third())))
-        string +=("}")
+        string = ''
+        string += self.get_first().form(string, flavour, context)
+        string += "{"
+        string += str(self.get_second())
+        string += ","
+        string += str(self.get_third())
+        string += "}"
         return string
 
     def is_valid(self):

@@ -18,6 +18,11 @@ class Objective:
         """
         r = tree.form("", flavour=RegexFlavour.Python, context=RegexContext())
         # r = "13[3456789]\d{8}"
+        LOGGER.info("===============")
+        LOGGER.info(f"[regex:]")
+        LOGGER.info(r)
+        LOGGER.info("===============")
+        # r = re.escape(r)
         pat = re.compile(r)
         len_P = len(self.__dataset.pos_examples)
         len_N = len(self.__dataset.neg_examples)
@@ -57,12 +62,20 @@ class Objective:
         # LOGGER.info(count_N)
         # LOGGER.info(np.sum(count_P))
         # LOGGER.info(np.sum(count_N))
-        P_s = (np.sum(match_P)+SMALL)/(np.sum(match_P)+SMALL+np.sum(match_N))
-        P_c = (np.sum(match_P*count_P)+SMALL) / (np.sum(match_N*count_N)+np.sum(match_P*count_P)+SMALL) + \
-            (np.sum((1-match_P)*count_P)+SMALL) / \
+        P_s = (np.sum(match_P))/(np.sum(match_P)+SMALL+np.sum(match_N))
+        P_c = (np.sum(match_P*count_P)) / (np.sum(match_N*count_N)+np.sum(match_P*count_P)+SMALL) + \
+            (np.sum((1-match_P)*count_P)) / \
             (np.sum((1-match_P)*count_P)+SMALL+np.sum((1-match_N)*count_N))
 
         L_score = np.exp(-np.abs(len(r)-total_len/len_P))
 
-        LOGGER.info([P_s,P_c,L_score])
-        return [P_s,P_c,L_score]
+        # LOGGER.info("P_s = %d/%d", np.sum(match_P),
+        #             np.sum(match_P)+np.sum(match_N))
+        # LOGGER.info("P_c = %d / %d + %d / %d",
+        #             np.sum(match_P*count_P),
+        #             np.sum(match_N*count_N)+np.sum(match_P * count_P),
+        #             np.sum((1-match_P)*count_P), np.sum((1-match_P)*count_P)+np.sum((1-match_N)*count_N))
+        # LOGGER.info("L_score = np.exp(-np.abs(%d-%d/%d))",
+        #             len(r), total_len, len_P)
+        LOGGER.info([P_s, P_c, L_score])
+        return [P_s, P_c, L_score]

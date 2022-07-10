@@ -19,10 +19,10 @@ class Fitness:
         return sum(self.__fitness_arr)
 
     def __eq__(self, other):
-        return self.fitness() == other.fitness()
+        return self.fitness == other.fitness
 
     def __lt__(self, other):
-        return self.fitness() < other.fitness()
+        return self.fitness < other.fitness
 
     def __hash__(self):
         return hash(

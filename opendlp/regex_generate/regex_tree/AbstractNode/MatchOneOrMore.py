@@ -3,7 +3,7 @@ from opendlp.regex_generate.regex_tree.AbstractNode.Quantifier import Quantifier
 
 
 class MatchOneOrMore (Quantifiers):
-    def buildcopy(self):
+    def build_copy(self):
         return MatchOneOrMore()
         
 
@@ -13,19 +13,18 @@ class MatchOneOrMore (Quantifiers):
         from opendlp.regex_generate.regex_tree.AbstractNode.Group import Group
         from opendlp.regex_generate.regex_tree.AbstractNode.NonCapturingGroup import NonCapturingGroup
         tmp = ""
-        child = Node
         child = self.get_children()[0]
         index = context.inc_groups()
-        TMP=child.form(tmp, flavour, context)
+        tmp=child.form(tmp, flavour, context)
         l = len(tmp)-1 if child.is_escaped() else len(tmp)
         group = l > 1 and not(child.is_character_class()) and  not(isinstance(child, Group)) and not(isinstance(child,NonCapturingGroup))
-
+        string = ''
         if(group):
             string +=("(?:")
-            string +=(TMP)
+            string +=tmp
             string +=(")")
         else:
-            string +=(TMP)
-        string +=("++")
+            string += tmp
+        string += "+?"
         return string
 

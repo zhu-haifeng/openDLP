@@ -10,15 +10,15 @@ class TernaryOperator(AbstractNode):
         
 
     @abstractmethod
-    def buildcopy(self):
+    def build_copy(self):
         ""
         ""
     def clone_tree(self) ->Node :
-        top = self.buildcopy();
+        top = self.build_copy();
         topchild = []
         topchild = top.get_children()
         child = Node
-        for child in range(self.get_children()):
+        for child in self.get_children():
                 Newchild = child.clone_tree()
                 Newchild.set_parent(top)
                 topchild += Newchild

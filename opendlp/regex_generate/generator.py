@@ -65,7 +65,7 @@ def generate(status, regex_name, train_data_file):
     evolve_param = EvolveParam()
     iter_best = 0
     for g in range(conf.MAX_ITERATIONS):
-        population = evolve(evolve_param, population, fitness_sorted)
+        population = evolve(evolve_param, population, fitness_sorted,rand_generator)
         fitness_sorted = get_fitness_rank(population, objective)
 
         best_fitness = get_best_fitness_precison(fitness_sorted)

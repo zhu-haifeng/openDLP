@@ -24,14 +24,14 @@ class BinaryOperator (AbstractNode):
 
         
     @abstractmethod
-    def buildCopy(self):
+    def build_copy(self):
         ""
         ""
        
     
     
     def cloneTree() ->Node :
-        bop = buildCopy()
+        bop = build_copy()
         bopChild = []
         bopChild = bop.get_children()
         child = Node

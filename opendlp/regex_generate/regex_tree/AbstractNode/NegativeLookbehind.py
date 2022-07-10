@@ -4,7 +4,7 @@ from opendlp.regex_generate.regex_tree.AbstractNode.Lookaround import Lookaround
 
 
 class NegativeLookbehind (Lookaround) :
-    def buildcopy(self):
+    def build_copy(self):
         return NegativeLookbehind()
 
     def is_valid(self):
@@ -15,8 +15,9 @@ class NegativeLookbehind (Lookaround) :
         return self.is_look_behind_vaild()
 
     def form(self, string, flavour, context):
+        string = ''
         string +=("(?<!")
-        self.get_children()[0].form(string, flavour, context)
+        string += self.get_children()[0].form(string, flavour, context)
         string +=(")")
         return string
             

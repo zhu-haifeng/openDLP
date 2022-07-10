@@ -25,8 +25,8 @@ class Full:
             candidate = self.full(1)
             if(candidate.is_valid()):
                 population.append(candidate)
-            i += 1
-            LOGGER.info(f"num {i}th population ok")
+                i += 1
+                LOGGER.info(f"[full] num {i}th population ok")
         return population
 
     def full(self, depth: int) -> Node:
@@ -47,7 +47,10 @@ class Full:
     def randomFunction(self):
         # print(self.node_factory.function_set)
 
-        return self.node_factory.function_set[randint(0, len(self.node_factory.function_set)-1)]
+        return self.node_factory.function_set[randint(0, len(self.node_factory.function_set)-1)].build_copy()
 
     def randomLeaf(self) -> Leaf:
-        return self.node_factory.terminal_set[randint(0, len(self.node_factory.terminal_set)-1)]
+        i = randint(20, len(self.node_factory.terminal_set)-1)
+        # if(i >=28):
+        #     LOGGER.info("randomLeaf id:%d",i)
+        return self.node_factory.terminal_set[i].clone_tree()

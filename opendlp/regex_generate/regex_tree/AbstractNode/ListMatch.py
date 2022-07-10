@@ -2,16 +2,14 @@ from opendlp.regex_generate.regex_tree.node import Node
 from opendlp.regex_generate.regex_tree.AbstractNode.UnaryOperator import UnaryOperator
 
 class ListMatch (UnaryOperator):
-    def buildcopy(self):
+    def build_copy(self):
         return ListMatch()
 
     def form(self, string, flavour, context):
-        child = Node
         child = self.get_children()[0]
-        # string +=("[")
+        string += ""
         string += ("[")
-        string=child.form(string, flavour, context)
-        # string +=("]")
+        string += child.form(string, flavour, context)
         string += ("]")
         return string
 

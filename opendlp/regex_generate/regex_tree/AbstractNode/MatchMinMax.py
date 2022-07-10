@@ -7,7 +7,7 @@ class MatchMinMax (TernaryOperator):
     Max_N_generation = 20
 
     
-    def buildcopy(self):
+    def build_copy(self):
         return MatchMinMax()
 
     def form(self, string, flavour, context):
@@ -15,14 +15,13 @@ class MatchMinMax (TernaryOperator):
         from opendlp.regex_generate.regex_tree.AbstractNode.Group import Group
         from opendlp.regex_generate.regex_tree.AbstractNode.NonCapturingGroup import NonCapturingGroup
         tmp = ""
-        child = Node
         child = self.get_first()
         index = context.inc_groupss();
         TMP=child.form(tmp, flavour, context)
         l = len(tmp)-1 if child.is_escaped() else len(tmp)
         group = l > 1 and not(child.is_character_class()) and not(
             isinstance(child, Group)) and not(isinstance(child, NonCapturingGroup))
-
+        string = ''
         if (group):
             string += ("(?:")
             string +=(TMP)
@@ -31,10 +30,10 @@ class MatchMinMax (TernaryOperator):
             string +=(TMP)
 
         string += ("{")
-        string += (int(str(self.get_second())))
+        string += str(self.get_second())
         string += ","
-        string += (int(str(self.get_third())))
-        string += ("}+")
+        string += str(self.get_third())
+        string += ("}?")
         return string
 
     def is_valid(self):

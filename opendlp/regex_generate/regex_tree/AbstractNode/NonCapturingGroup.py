@@ -3,12 +3,13 @@ from opendlp.regex_generate.regex_tree.AbstractNode.UnaryOperator import UnaryOp
 
 
 class NonCapturingGroup (UnaryOperator) :
-    def buildcopy(self):
+    def build_copy(self):
         return NonCapturingGroup()
 
     def form(self, string, flavour, context):
+        string = ''
         string +=("(?:")
-        self.get_children()[0].form(string, flavour, context)
+        string += self.get_children()[0].form(string, flavour, context)
         string +=(")")
         return string
 

@@ -16,11 +16,12 @@ class BackReference(Leaf):
         return 0
 
     def form(self, string: str, flavour=..., context=...):
-        ans = string +"//"
-        if(flavour==RegexFlavour.Java):
-            return ans + self.__value
-        else:
-            return ans + self.__value+context.inc_expansion_groups()
+        # ans = string +"//"
+        # if(flavour==RegexFlavour.Java):
+        #     return ans + self.__value
+        # else:
+        #     return ans + self.__value+context.inc_expansion_groups()
+        return "//" + str(self.__value)
 
     def clone_tree(self):
         return BackReference(self.__value)

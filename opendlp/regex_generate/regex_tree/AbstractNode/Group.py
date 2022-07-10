@@ -9,15 +9,14 @@ from opendlp.regex_generate.regex_tree.AbstractNode.UnaryOperator import UnaryOp
 
 
 class Group (UnaryOperator) :
-    def buildcopy(self):
+    def build_copy(self):
         return Group()
 
     def form(self, string, flavour, context):
-        # self.append("(")
+        string = ''
         string += ("(")
         context.inc_groups();
-        self.get_children()[0].form(string, flavour, context)
-        # self.append(")")
+        string += self.get_children()[0].form(string, flavour, context)
         string += (")")
         return string
 
