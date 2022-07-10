@@ -11,7 +11,7 @@ class EvolveParam:
         self.leaf_crossover_select_proba = 0.1
 
         self.random_generate_percent = 0.2
-        self.evolve_percent = 0.2
+        self.evolve_percent = 0.8
 
 
 

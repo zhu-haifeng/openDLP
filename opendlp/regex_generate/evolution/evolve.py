@@ -8,13 +8,13 @@ from opendlp.regex_generate.regex_tree.node import Node
 
 
 def random_idx(len: int) -> int:
-    set = set()
+    s = set()
     cnt = 0
     while cnt < 7:
         r = randint(0, len-1)
-        if r not in set:
-            set.add(r)
-    return min(set)
+        if r not in s:
+            s.add(r)
+    return min(s)
 
 
 def mutate_one(tree: Node) -> Node:
