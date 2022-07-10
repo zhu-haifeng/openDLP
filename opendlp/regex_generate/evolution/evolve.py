@@ -50,9 +50,7 @@ def evolve(evolve_param: EvolveParam, population, fitness_sorted:List[Fitness], 
     cnt = 0
     while cnt < crossover_cnt:
         tree_a, tree_b = crossover_one_pair(
-            fitness_sorted[random_idx(ori_len)].tree,
-            fitness_sorted[random_idx(ori_len)].tree
-        )
+            fitness_sorted[random_idx(ori_len)].tree, fitness_sorted[random_idx(ori_len)].tree)
         if tree_a.is_valid() and tree_b.is_valid():
             pop_out.append(tree_a)
             pop_out.append(tree_b)
