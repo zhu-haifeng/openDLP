@@ -3,6 +3,8 @@ from opendlp.regex_generate.regex_tree.leaf.leaf import Leaf
 from typing import List
 from random import randint
 from opendlp.regex_generate.node_factory import NodeFactory
+import logging
+LOGGER = logging.getLogger('openDLP')
 
 class Growth:
     def __init__(self, max_depth, node_factory:NodeFactory):
@@ -22,7 +24,8 @@ class Growth:
             candidate = self.grow(1)
             if(candidate.is_valid()):
                 population.append(candidate)
-            i += 1
+                i += 1
+                LOGGER.info(f"[growth] num {i}th population ok")
         return population
 
     def grow(self, depth: int) -> Node:
@@ -47,7 +50,7 @@ class Growth:
         return tree
 
     def randomFunction(self):
-        return self.node_factory.function_set[randint(0, len(self.node_factory.function_set)-1)]
+        return self.node_factory.function_set[randint(0, len(self.node_factory.function_set)-1)].build_copy()
 
     def randomLeaf(self) -> Leaf:
-        return self.node_factory.terminal_set[randint(0, len(self.node_factory.terminal_set)-1)]
+        return self.node_factory.terminal_set[randint(0, len(self.node_factory.terminal_set)-1)].clone_tree()

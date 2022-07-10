@@ -17,13 +17,13 @@ class UnaryOperator (AbstractNode):
         
         
     @abstractmethod
-    def buildcopy(self):
+    def build_copy(self):
         ""
         ""
 
     def clone_tree(self):
-        clone = self.buildcopy()
-        if(self.get_children().isEmpty() == 0):
+        clone = self.build_copy()
+        if(self.get_children() != []):
             child = self.get_children()[0].clone_tree()
             child.set_parent(clone)
             # clone.get_children().add(child)

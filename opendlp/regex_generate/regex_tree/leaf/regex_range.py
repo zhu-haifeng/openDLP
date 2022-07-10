@@ -12,7 +12,8 @@ class RegexRange(Leaf):
         return 0
 
     def form(self, string: str, flavour=..., context=...):
-        return string + self.__value
+        # return string + self.__value
+        return self.__value
 
     def clone_tree(self):
         return RegexRange(self.__value)

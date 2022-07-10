@@ -1,13 +1,14 @@
 from opendlp.regex_generate.regex_tree.AbstractNode.UnaryOperator import UnaryOperator
 
 class ListNotMatch (UnaryOperator) :
-    def buildcopy(self):
+    def build_copy(self):
         return ListNotMatch()
 
     def form(self, string, flavour, context):
         child = self.get_children()[0]
+        string = ""
         string += ("[^")
-        string=child.form(string, flavour, context)
+        string += child.form(string, flavour, context)
         string += ("]")
         return string
 

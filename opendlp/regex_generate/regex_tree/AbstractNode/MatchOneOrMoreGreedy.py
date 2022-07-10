@@ -2,11 +2,12 @@ from opendlp.regex_generate.regex_tree.AbstractNode.Quantifier import Quantifier
 
 
 class MatchOneOrMoreGreedy (Quantifiers):
-    def buildcopy(self):
+    def build_copy(self):
         return MatchOneOrMoreGreedy()
 
     def form(self, string, flavour, context):
-        self.get_children()[0].form(string, flavour, context)
+        string = ''
+        string += self.get_children()[0].form(string, flavour, context)
         string +=("+")
         return string
         

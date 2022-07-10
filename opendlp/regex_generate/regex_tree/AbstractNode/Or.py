@@ -1,18 +1,19 @@
 
 from opendlp.regex_generate.regex_tree.AbstractNode.BinaryOperator import BinaryOperator
-# from opendlp.regex_generate.regex_tree.AbstractNode.Quantifier import Quantifiers
+from opendlp.regex_generate.regex_tree.AbstractNode.Quantifier import Quantifiers
 
 class Or(BinaryOperator):
-    def buildCopy(self):
+    def build_copy(self):
         return Or()
 
     def form(self, string, flavour, context):
+        string = ''
         if (isinstance(self.get_parent(), Quantifiers)):
             string += ("(?:")
 
-        self.getLeft().form(string, flavour, context)
+        string += self.getLeft().form(string, flavour, context)
         self  += ("|")
-        self.getRight().form(string, flavour, context)
+        string += self.getRight().form(string, flavour, context)
         if (isinstance(self.get_parent(),Quantifiers)):
             string += (")")
         return string

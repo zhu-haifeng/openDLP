@@ -16,7 +16,7 @@ class Constant(Leaf):
         return 0
 
     def form(self, string: str, flavour=..., context=...):
-        return string + self.__value
+        return self.__value
 
     def clone_tree(self):
         return Constant(self.__value)
