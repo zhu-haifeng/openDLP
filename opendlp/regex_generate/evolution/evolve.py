@@ -1,9 +1,15 @@
+from asyncio.windows_events import NULL
+from curses.ascii import NUL
+from hashlib import new
+from xmlrpc.client import boolean
+
+from regex import B
 from opendlp.regex_generate.generations.random_generate import RandomGenerator
 from opendlp.regex_generate.config.evolve_param import EvolveParam
 from opendlp.regex_generate.config import conf
 from opendlp.regex_generate.fitness.fitness import Fitness
 from random import randint
-from typing import List
+from typing import List, Tuple
 from opendlp.regex_generate.regex_tree.node import Node
 
 
@@ -18,15 +24,59 @@ def random_idx(len: int) -> int:
     return min(s)
 
 
+def random_node(tree: Node):
+    ""
+    ""
+
+
 def mutate_one(tree: Node) -> Node:
     return tree
 
 
-def crossover_one_pair(tree_a: Node, tree_b: Node) -> Node:
-    return (tree_a, tree_b)
+
+def check_Maxdepth(root:Node , depth:int ):
+
+    return True
+
+    
 
 
-def evolve(evolve_param: EvolveParam, population, fitness_sorted:List[Fitness], rand_generator: RandomGenerator):
+def crossover_one_pair(tree_a: Node, tree_b: Node) -> Tuple[Node, Node]:
+    isvalid = False
+    tries = 0
+    for tries in range(20):
+        new_IndividualA = tree_a.clone_tree()
+        new_IndividualB = tree_b.clone_tree()
+
+        parent_A, index_A, node_A = random_node(new_IndividualA)
+        parent_B, index_B, node_B = random_node(new_IndividualB)
+
+        if (node_A != NULL and node_B != NULL):
+            # aParent = randomNodeA.get_parent()
+            a_childs = parent_A.get_children()
+            b_childs = parent_B.get_children()
+
+            a_childs.set(index_A, node_B) # set??????
+            b_childs.set(index_B, node_A)
+
+            new_IndividualA.set_parent(parent_B)
+            new_IndividualB.set_parent(parent_A)
+
+            if(#check_Maxdepth(new_IndividualA, 1)
+                    # and check_Maxdepth(new_IndividualB, 1)
+                    new_IndividualA.is_valid()
+                    and new_IndividualB.is_valid()):
+
+                isvalid = True
+                break
+
+    if(isvalid):
+        return [new_IndividualA, new_IndividualB]
+    else:
+        return NULL
+
+
+def evolve(evolve_param: EvolveParam, population, fitness_sorted: List[Fitness], rand_generator: RandomGenerator):
     """
     evolve
     @param evolve_param:
