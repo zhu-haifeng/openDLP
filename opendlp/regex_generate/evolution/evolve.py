@@ -5,6 +5,8 @@ from opendlp.regex_generate.generations.growth import Growth
 from opendlp.regex_generate.config.evolve_param import EvolveParam
 from opendlp.regex_generate.config import conf
 from opendlp.regex_generate.fitness.fitness import Fitness
+from random import randint
+from typing import List, Tuple
 from opendlp.regex_generate.regex_tree.node import Node
 from opendlp.regex_generate.regex_tree.leaf.leaf import Leaf
 from opendlp.regex_generate.regex_tree.AbstractNode.AbstractNode import AbstractNode
@@ -29,7 +31,7 @@ def random_node(tree: Node, evolve_param: EvolveParam) -> Tuple[Node, int, Node]
     head: int = 0
     while head < len(queue):
         parent = queue[head]
-        children = parent.get_children
+        children = parent.get_children()
         for i, c in enumerate(children):
             if isinstance(c, Leaf):
                 leaf_arr.append((parent, i, c))
@@ -38,14 +40,17 @@ def random_node(tree: Node, evolve_param: EvolveParam) -> Tuple[Node, int, Node]
                 queue.append(c)
         head += 1
     rand = random()
-    if(rand < evolve_param.root_crossover_select_proba):
-        return root_arr[0]
-    elif(rand < evolve_param.root_crossover_select_proba+evolve_param.node_crossover_select_proba):
+    if(child_arr != [] and rand < evolve_param.node_crossover_select_proba):
         idx = randint(0,len(child_arr)-1)
         return child_arr[idx]
-    else:
+    rand -= evolve_param.node_crossover_select_proba
+    if(leaf_arr != [] and rand < evolve_param.leaf_crossover_select_proba):
         idx = randint(0,len(leaf_arr)-1)
         return leaf_arr[idx]
+        
+    rand -= evolve_param.leaf_crossover_select_proba
+    # if(rand < evolve_param.root_crossover_select_proba):
+    return root_arr[0]
 
 def mutate_one(tree: Node,evolve_param: EvolveParam,rand_generator: RandomGenerator) -> Node:
     new_nodes = rand_generator.generate(20)
@@ -61,11 +66,42 @@ def mutate_one(tree: Node,evolve_param: EvolveParam,rand_generator: RandomGenera
     return None
 
 
-def crossover_one_pair(tree_a: Node, tree_b: Node,evolve_param: EvolveParam) -> Node:
-    return (tree_a, tree_b)
+def crossover_one_pair(tree_a: Node, tree_b: Node,evolve_param: EvolveParam) -> Tuple[Node, Node]:
+    isvalid = False
+    tries = 0
+    for tries in range(20):
+        new_IndividualA = tree_a.clone_tree()
+        new_IndividualB = tree_b.clone_tree()
+
+        parent_A, index_A, node_A = random_node(new_IndividualA, evolve_param)
+        parent_B, index_B, node_B = random_node(new_IndividualB, evolve_param)
+
+        if (node_A != None and node_B != None):
+            # aParent = randomNodeA.get_parent()
+            a_childs = parent_A.get_children()
+            b_childs = parent_B.get_children()
+
+            a_childs[index_A] = node_B 
+            b_childs[index_B] = node_A
+
+            node_A.set_parent(parent_B)
+            node_B.set_parent(parent_A)
+
+            if(#check_Maxdepth(new_IndividualA, 1)
+                    # and check_Maxdepth(new_IndividualB, 1)
+                    new_IndividualA.is_valid()
+                    and new_IndividualB.is_valid()):
+
+                isvalid = True
+                break
+
+    if(isvalid):
+        return (new_IndividualA, new_IndividualB)
+    else:
+        return None
 
 
-def evolve(evolve_param: EvolveParam, population, fitness_sorted:List[Fitness], rand_generator: RandomGenerator):
+def evolve(evolve_param: EvolveParam, population, fitness_sorted: List[Fitness], rand_generator: RandomGenerator):
     """
     evolve
     @param evolve_param:
@@ -81,7 +117,7 @@ def evolve(evolve_param: EvolveParam, population, fitness_sorted:List[Fitness], 
     keep_cnt = evolve_total * evolve_param.keep_proba
     cnt = 0
     while cnt < mutation_cnt:
-        tree = mutate_one(fitness_sorted[random_idx(ori_len)].tree, evolve_param)
+        tree = mutate_one(fitness_sorted[random_idx(ori_len)].tree, evolve_param, rand_generator)
         if tree and tree.is_valid():
             pop_out.append(tree)
             cnt += 1

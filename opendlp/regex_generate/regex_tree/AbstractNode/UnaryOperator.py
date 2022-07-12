@@ -27,8 +27,7 @@ class UnaryOperator (AbstractNode):
             child = self.get_children()[0].clone_tree()
             child.set_parent(clone)
             # clone.get_children().add(child)
-            tmp = child.get_children()
-            tmp += child
+            clone.get_children().append(child)
 
         return clone
 

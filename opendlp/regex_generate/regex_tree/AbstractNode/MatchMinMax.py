@@ -17,17 +17,17 @@ class MatchMinMax (TernaryOperator):
         tmp = ""
         child = self.get_first()
         index = context.inc_groupss();
-        TMP=child.form(tmp, flavour, context)
+        tmp=child.form(tmp, flavour, context)
         l = len(tmp)-1 if child.is_escaped() else len(tmp)
         group = l > 1 and not(child.is_character_class()) and not(
             isinstance(child, Group)) and not(isinstance(child, NonCapturingGroup))
         string = ''
         if (group):
             string += ("(?:")
-            string +=(TMP)
+            string +=(tmp)
             string += (")")
         else:
-            string +=(TMP)
+            string +=(tmp)
 
         string += ("{")
         string += str(self.get_second())
